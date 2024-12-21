@@ -1,32 +1,22 @@
-const display = document.querySelector('#display');
-const keys = document.querySelector('.calculator-keys');
+function clearDisplay() {
+    document.getElementById("display").value = '';
+}
 
-keys.addEventListener('click', (event) => {
-    const { target } = event;
-    const { value } = target;
-    if (!target.matches('button')) {
-        return;
-    } else {
-        switch (value) {
-            case '+':
-            case '-':
-            case '*':
-            case '/':
-                display.value += value;
-                break;
-            case '=':
-                try {
-                    display.value = eval(display.value);
-                } catch {
-                    display.value = 'Error';
-                }
-                break;
-            case 'all-clear':
-                display.value = '';
-                break;
-            default:
-                display.value += value;
-                break;
-        }
+function deleteLast() {
+    let display = document.getElementById("display");
+    display.value = display.value.slice(0, -1);
+}
+
+function appendValue(value) {
+    let display = document.getElementById("display");
+    display.value += value;
+}
+
+function calculate() {
+    let display = document.getElementById("display");
+    try {
+        display.value = eval(display.value);
+    } catch {
+        display.value = 'Error';
     }
-});
+}
